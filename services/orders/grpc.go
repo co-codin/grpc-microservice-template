@@ -1,6 +1,9 @@
 package main
 
 import (
+	handler "grpc-microservice/services/orders/handler/orders"
+	"grpc-microservice/services/orders/service"
+
 	"log"
 	"net"
 
@@ -23,6 +26,13 @@ func (s *gRPCServer) Run() error {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	gRPCServer := grpc.NewServer()
+	grpcServer := grpc.NewServer()
 
+	orderService := service.NewOrderService()
+
+	handler.NewGrpcOrdersService(grpcServer, orderService)
+
+	log.Println("Starting gRPC server on", s.addr)
+
+	return grpcServer.Serve(lis)
 }
