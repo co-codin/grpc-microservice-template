@@ -1,6 +1,7 @@
 package orders
 
 import (
+	"grpc-microservice/services/common/genproto/orders"
 	"grpc-microservice/services/orders/types"
 	"net/http"
 )
@@ -20,5 +21,6 @@ func (h *OrdersHttpHandler) RegisterRouter(router *http.ServeMux) {
 }
 
 func (h *OrdersHttpHandler) CreateOrder(w http.ResponseWriter, r *http.Request) {
-	
+	var req orders.CreateOrderRequest
+	err := util.ParseJ
 }
